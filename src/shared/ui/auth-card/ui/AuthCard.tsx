@@ -10,7 +10,7 @@ export const AuthCard = ({ title, children }: Props) => {
   return (
     <Card className="max-w-sm sm:min-w-sm">
       <CardHeader>
-        <CardTitle>{title}</CardTitle>
+        <CardTitle className="text-center">{title}</CardTitle>
       </CardHeader>
       <CardContent>{children}</CardContent>
     </Card>

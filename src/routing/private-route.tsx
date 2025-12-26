@@ -1,3 +1,4 @@
+import { DashboardLayout } from "@/layout/DashboardLayout";
 import { Route, Redirect } from "react-router-dom";
 
 export const PrivateRoute = ({ component: Component, ...rest }: any) => {
@@ -7,7 +8,13 @@ export const PrivateRoute = ({ component: Component, ...rest }: any) => {
     <Route
       {...rest}
       render={(props) =>
-        isAuth ? <Component {...props} /> : <Redirect to="/auth/sign-in" />
+        isAuth ? (
+          <DashboardLayout>
+            <Component {...props} />
+          </DashboardLayout>
+        ) : (
+          <Redirect to="/auth/sign-in" />
+        )
       }
     />
   );

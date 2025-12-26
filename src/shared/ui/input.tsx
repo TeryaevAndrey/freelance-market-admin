@@ -1,13 +1,10 @@
 import * as React from "react"
-import { Eye, EyeOff } from "lucide-react" // Предположим, вы используете lucide-react
+import { Eye, EyeOff } from "lucide-react"
 import { cn } from "@/lib/utils"
-// Импортируйте ваши компоненты групп (замените пути на реальные)
-// import { InputGroup, InputGroupInput, InputGroupAddon } from "@/shared/ui/input-group" 
 
 function Input({ className, type, ...props }: React.ComponentProps<"input">) {
   const [showPassword, setShowPassword] = React.useState(false)
 
-  // Если это не пароль — возвращаем обычный инпут как был
   if (type !== "password") {
     return (
       <input
