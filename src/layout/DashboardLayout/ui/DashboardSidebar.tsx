@@ -20,7 +20,7 @@ import { Link } from "react-router-dom";
 export const DashboardSidebar = () => {
   return (
     <Sidebar>
-      <SidebarHeader className="h-17.5 flex justify-center px-4"> 
+      <SidebarHeader className="h-17.5 flex justify-center px-4">
         <div className="flex justify-between items-center gap-3">
           <div className="flex items-center gap-2">
             <IconBox>PM</IconBox>
@@ -49,24 +49,6 @@ export const DashboardSidebar = () => {
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-
-        <SidebarGroup>
-          <SidebarGroupLabel>Пользователи</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <Link to="/dashboard/users">
-                    <IconBox size="md">
-                      <Users />
-                    </IconBox>
-                    <span>Клиенты</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
 
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
@@ -74,7 +56,7 @@ export const DashboardSidebar = () => {
                     <IconBox size="md">
                       <Users />
                     </IconBox>
-                    <span>Исполнители</span>
+                    <span>Пользователи</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -99,15 +81,19 @@ export const DashboardSidebar = () => {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="border-t py-4 flex flex-col gap-3">
+      <SidebarFooter className="border-t py-4 flex flex-col gap-3 px-4">
         <div className="flex justify-between items-center gap-3">
           <Text>Права: Super Admin</Text>
           <Badge>Online</Badge>
         </div>
 
-        <Button className="border-destructive text-destructive hover:bg-destructive hover:text-white" variant="outline" size="sm">
-            <span>Выйти</span>
-            <LogOut />
+        <Button
+          className="border-destructive text-destructive hover:bg-destructive hover:text-white"
+          variant="outline"
+          size="sm"
+        >
+          <span>Выйти</span>
+          <LogOut />
         </Button>
       </SidebarFooter>
     </Sidebar>

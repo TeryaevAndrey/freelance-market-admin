@@ -2,6 +2,7 @@ import { HomePage } from "@/pages/home";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { PrivateRoute } from "./private-route";
 import { SignInPage } from "@/pages/auth/sign-in";
+import { UsersPage } from "@/pages/dashboard/users";
 
 export const Routing = () => {
   return (
@@ -14,6 +15,7 @@ export const Routing = () => {
 
       {/* Защищенные роуты */}
       <PrivateRoute exact path="/dashboard" component={HomePage} />
+      <PrivateRoute exact path="/dashboard/users" component={UsersPage} />
 
       <Redirect to="/" />
     </Switch>
