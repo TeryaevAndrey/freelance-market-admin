@@ -1,23 +1,27 @@
+import { Routes, Route, Navigate } from "react-router-dom";
 import { HomePage } from "@/pages/home";
-import { Redirect, Route, Switch } from "react-router-dom";
-import { PrivateRoute } from "./private-route";
 import { SignInPage } from "@/pages/auth/sign-in";
 import { UsersPage } from "@/pages/dashboard/users";
+import { PrivateRoute } from "./private-route";
 
 export const Routing = () => {
   return (
-    <Switch>
+    <Routes>
       {/* Публичные роуты */}
-      <Route exact path="/auth/sign-in" component={SignInPage} />
+      <Route path="/auth/sign-in" element={<SignInPage />} />
+      
+      {/* Обычные роуты без специального лейаута */}
+      <Route path="/" element={<HomePage />} />
 
-      {/* Роуты внутри основного layout */}
-      <Route exact path="/" component={HomePage} />
+      {/* Группа защищенных роутов */}
+      {/* Все, что внутри, будет обернуто в PrivateRoute (и DashboardLayout) */}
+      <Route element={<PrivateRoute />}>
+        <Route path="/dashboard" element={<HomePage />} />
+        <Route path="/dashboard/users" element={<UsersPage />} />
+      </Route>
 
-      {/* Защищенные роуты */}
-      <PrivateRoute exact path="/dashboard" component={HomePage} />
-      <PrivateRoute exact path="/dashboard/users" component={UsersPage} />
-
-      <Redirect to="/" />
-    </Switch>
+      {/* Редирект для всех несуществующих страниц (вместо Redirect) */}
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 };

@@ -7,6 +7,8 @@ export const textVariants = cva("", {
     size: {
       xs: "text-xs",
       default: "text-sm md:text-base",
+      xl: "text-xl",
+      "3xl": "text-3xl",
     },
     weight: {
       normal: "font-normal",

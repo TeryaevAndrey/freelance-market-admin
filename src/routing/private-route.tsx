@@ -1,21 +1,16 @@
+import { Navigate, Outlet } from "react-router-dom";
 import { DashboardLayout } from "@/layout/DashboardLayout";
-import { Route, Redirect } from "react-router-dom";
 
-export const PrivateRoute = ({ component: Component, ...rest }: any) => {
+export const PrivateRoute = () => {
   const isAuth = true;
 
+  if (!isAuth) {
+    return <Navigate to="/auth/sign-in" replace />;
+  }
+
   return (
-    <Route
-      {...rest}
-      render={(props) =>
-        isAuth ? (
-          <DashboardLayout>
-            <Component {...props} />
-          </DashboardLayout>
-        ) : (
-          <Redirect to="/auth/sign-in" />
-        )
-      }
-    />
+    <DashboardLayout>
+      <Outlet />
+    </DashboardLayout>
   );
 };
