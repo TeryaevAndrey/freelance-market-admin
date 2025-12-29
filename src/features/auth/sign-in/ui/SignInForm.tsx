@@ -14,7 +14,9 @@ import { Button } from "@/shared/ui/button";
 export const SignInForm = () => {
   const form = useForm<FormSchema>();
 
-  const onSubmit = (data: FormSchema) => {};
+  const onSubmit = (data: FormSchema) => {
+    console.log(data);
+  };
 
   return (
     <Form {...form}>
