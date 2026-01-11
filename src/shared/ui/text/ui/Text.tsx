@@ -40,13 +40,14 @@ export const Text = ({
   tag,
   size,
   color,
+  weight,
   ...props
 }: Props) => {
   const Component = tag || "p";
 
   return (
     <Component
-      className={cn(textVariants({ size, color }), className)}
+      className={cn(textVariants({ size, color, weight }), className)}
       {...props}
     >
       {children}

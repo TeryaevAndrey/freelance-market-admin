@@ -3,6 +3,7 @@ import { HomePage } from "@/pages/home";
 import { SignInPage } from "@/pages/auth/sign-in";
 import { UsersPage } from "@/pages/dashboard/users";
 import { PrivateRoute } from "./private-route";
+import { OrdersPage } from "@/pages/dashboard/orders";
 
 export const Routing = () => {
   return (
@@ -18,6 +19,7 @@ export const Routing = () => {
       <Route element={<PrivateRoute />}>
         <Route path="/dashboard" element={<HomePage />} />
         <Route path="/dashboard/users" element={<UsersPage />} />
+        <Route path="/dashboard/orders" element={<OrdersPage />} />
       </Route>
 
       {/* Редирект для всех несуществующих страниц (вместо Redirect) */}

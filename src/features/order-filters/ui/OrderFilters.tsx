@@ -1,0 +1,172 @@
+import { Card, CardContent } from "@/shared/ui/card";
+import { useOrderFilters } from "../model/useOrderFilters";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+} from "@/shared/ui/form";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from "@/shared/ui/input-group";
+import { Search } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/shared/ui/select";
+import { SelectWithSearch } from "@/shared/ui/select-with-search";
+import { DatePicker } from "@/shared/ui/date-picker";
+
+export const OrderFilters = () => {
+  const form = useOrderFilters();
+
+  return (
+    <Card>
+      <CardContent>
+        <Form {...form}>
+          <div className="flex flex-wrap gap-4">
+            <FormField
+              control={form.control}
+              name="query"
+              render={({ field }) => (
+                <FormItem className="grow">
+                  <FormLabel>Поиск</FormLabel>
+                  <FormControl>
+                    <InputGroup>
+                      <InputGroupInput
+                        placeholder="Поиск по номеру заказа"
+                        {...field}
+                      />
+                      <InputGroupAddon align="inline-end">
+                        <Search />
+                      </InputGroupAddon>
+                    </InputGroup>
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+
+            <div className="flex flex-wrap gap-4">
+              <FormField
+                control={form.control}
+                name="status"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Статус</FormLabel>
+                    <FormControl>
+                      <Select
+                        value={field.value}
+                        name={field.name}
+                        onValueChange={field.onChange}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Выберите статус" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectGroup>
+                            <SelectItem value="all">Все</SelectItem>
+                          </SelectGroup>
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="city"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Город</FormLabel>
+                    <FormControl>
+                      <SelectWithSearch
+                        placeholder="Выберите город"
+                        list={[]}
+                        value={field.value}
+                        onChange={field.onChange}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="eventType"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Тип события</FormLabel>
+                    <FormControl>
+                      <Select
+                        name={field.name}
+                        value={field.value}
+                        onValueChange={field.onChange}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Выберите тип события" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectGroup>
+                            <SelectItem value="all">Все</SelectItem>
+                          </SelectGroup>
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="dateFrom"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Дата создания (от)</FormLabel>
+                    <FormControl>
+                      <DatePicker
+                        value={
+                          Boolean(field.value)
+                            ? new Date(field.value)
+                            : undefined
+                        }
+                        onChange={field.onChange}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="dateTo"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Дата создания (до)</FormLabel>
+                    <FormControl>
+                      <DatePicker
+                        value={
+                          Boolean(field.value)
+                            ? new Date(field.value)
+                            : undefined
+                        }
+                        onChange={field.onChange}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            </div>
+          </div>
+        </Form>
+      </CardContent>
+    </Card>
+  );
+};

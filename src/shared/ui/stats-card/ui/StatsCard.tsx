@@ -11,7 +11,7 @@ import type { HTMLAttributes } from "react";
 interface Props extends HTMLAttributes<HTMLDivElement> {
   title: string;
   description?: string;
-  count?: number;
+  count?: number | string;
 }
 
 export const StatsCard = ({ title, description, count = 0 }: Props) => {

@@ -13,7 +13,7 @@ import {
   SidebarMenuItem,
 } from "@/shared/ui/sidebar";
 import { Text } from "@/shared/ui/text";
-import { LayoutDashboard, LogOut, MapPinHouse, Users } from "lucide-react";
+import { LayoutDashboard, LogOut, MapPinHouse, Package, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export const DashboardSidebar = () => {
@@ -56,6 +56,17 @@ export const DashboardSidebar = () => {
                       <Users />
                     </IconBox>
                     <span>Пользователи</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link to="/dashboard/orders">
+                    <IconBox size="md">
+                      <Package />
+                    </IconBox>
+                    <span>Заказы</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>

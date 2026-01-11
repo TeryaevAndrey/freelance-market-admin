@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
+import { StatsCard } from "@/shared/ui/stats-card";
 import type { HTMLAttributes } from "react";
-import { StatsCard } from "./StatsCard";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   data: {
