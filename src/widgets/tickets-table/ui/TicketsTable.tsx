@@ -13,7 +13,7 @@ import {
 import { Text } from "@/shared/ui/text";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/ui/tooltip";
 import { TicketCardModal } from "@/widgets/ticket-card-modal";
-import { ArrowDownUp, ExternalLink, Scale3D, Users } from "lucide-react";
+import { ArrowDownUp, Scale3D, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export const TicketsTable = () => {
