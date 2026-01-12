@@ -1,11 +1,11 @@
+import { cn } from "@/lib/utils";
 import { Badge } from "@/shared/ui/badge";
 import { Button } from "@/shared/ui/button";
 import { PaidFor } from "@/shared/ui/paid-for";
-import { Progress } from "@/shared/ui/progress";
 import { TableCell, TableRow } from "@/shared/ui/table";
 import { Text } from "@/shared/ui/text";
 import { OrderServices } from "@/widgets/order-services";
-import { Anchor, ArrowDown, LocationEdit, Wallet } from "lucide-react";
+import { Anchor, ChevronDown, LocationEdit, Wallet } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -22,7 +22,9 @@ export const OrdersTableRow = () => {
         <TableCell>
           <div className="flex items-center gap-2">
             <Button variant="outline" size="icon-sm" onClick={toggleOpen}>
-              <ArrowDown />
+              <ChevronDown className={cn({
+                'rotate-180': isOpen
+              })} />
             </Button>
 
             <div className="flex flex-col gap-1">

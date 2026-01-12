@@ -6,6 +6,8 @@ export const textVariants = cva("", {
   variants: {
     size: {
       xs: "text-xs",
+      sm: "text-sm", 
+      md: "text-md",
       default: "text-sm md:text-base",
       xl: "text-xl",
       "3xl": "text-3xl",
@@ -18,12 +20,19 @@ export const textVariants = cva("", {
     },
     color: {
       foreground: "text-foreground",
+      mutedForeground: "text-muted-foreground",
+      white: "text-white"
     },
+    fontStyle: {
+      italic: "italic", 
+      notItalic: "not-italic"
+    }
   },
   defaultVariants: {
     size: "default",
     weight: "normal",
     color: "foreground",
+    fontStyle: "notItalic"
   },
 });
 

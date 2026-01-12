@@ -9,14 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/shared/ui/card";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/shared/ui/pagination";
+import { PagePagination } from "@/shared/ui/page-pagination";
 import {
   Table,
   TableBody,
@@ -106,25 +99,7 @@ export const UsersTable = () => {
         </Table>
       </CardContent>
       <CardFooter>
-        <Pagination className="lg:ml-auto lg:flex lg:justify-end">
-          <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious href="#" />
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">1</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">2</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">3</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationNext href="#" />
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
+        <PagePagination />
       </CardFooter>
     </Card>
   );

@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Badge } from "@/shared/ui/badge";
+import { Button } from "@/shared/ui/button";
 import {
   Card,
   CardContent,
@@ -18,6 +19,7 @@ import {
 } from "@/shared/ui/table";
 import { Text } from "@/shared/ui/text";
 import type { HTMLAttributes } from "react";
+import { Link } from "react-router-dom";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {}
 
@@ -73,6 +75,16 @@ export const OrderServices = ({ className }: Props) => {
             ))}
           </TableBody>
         </Table>
+
+        <div className="flex justify-between items-center gap-4 mt-4 lg:mt-6">
+          <Text className="opacity-50" size="xs">
+            Подсказка: родительский заказ может быть частично оплачен, даже если
+            отдельные услуги уже закрыты.
+          </Text>
+          <Button variant="outline" size="sm" asChild>
+            <Link to="/dashboard/orders/1">Открыть карточку заказа</Link>
+          </Button>
+        </div>
       </CardContent>
     </Card>
   );
