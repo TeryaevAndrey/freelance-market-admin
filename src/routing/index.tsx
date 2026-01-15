@@ -6,6 +6,7 @@ import { PrivateRoute } from "./private-route";
 import { OrdersPage } from "@/pages/dashboard/orders";
 import { ModerationPage } from "@/pages/dashboard/moderation";
 import { TicketsPage } from "@/pages/dashboard/tickets";
+import { UserPage } from "@/pages/dashboard/user";
 
 export const Routing = () => {
   return (
@@ -21,6 +22,7 @@ export const Routing = () => {
       <Route element={<PrivateRoute />}>
         <Route path="/dashboard" element={<HomePage />} />
         <Route path="/dashboard/users" element={<UsersPage />} />
+        <Route path="/dashboard/users/:id" element={<UserPage />} />
         <Route path="/dashboard/orders" element={<OrdersPage />} />
         <Route path="/dashboard/moderation" element={<ModerationPage />} />
         <Route path="/dashboard/tickets" element={<TicketsPage />} />

@@ -36,7 +36,7 @@ export const textVariants = cva("", {
   },
 });
 
-type Tag = "p" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+type Tag = "p" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "span";
 
 export type Props<T extends Tag = "p"> = HTMLAttributes<HTMLElement> &
   VariantProps<typeof textVariants> & {
