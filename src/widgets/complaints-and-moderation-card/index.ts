@@ -1,0 +1,1 @@
+export {ComplaintsAndModerationCard} from "./ui/ComplaintsAndModerationCard";

@@ -1,10 +1,13 @@
 import { UserCard } from "@/entities/user";
 import { PageBreadCrumbs } from "@/shared/ui/page-breadcrumbs";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/ui/tabs";
+import { ComplaintsAndModerationCard } from "@/widgets/complaints-and-moderation-card";
 import { UserContent } from "@/widgets/user-content";
+import { UserFinance } from "@/widgets/user-finance";
 import { UserOrdersAndTransactions } from "@/widgets/user-orders-and-transactions";
 import { UserOverview } from "@/widgets/user-overview";
 import { UserProfileAndAccess } from "@/widgets/user-profile-and-access";
+import { UserTicketsCard } from "@/widgets/user-tickets-card";
 import { useParams } from "react-router-dom";
 
 export const UserPage = () => {
@@ -49,6 +52,15 @@ export const UserPage = () => {
         </TabsContent>
         <TabsContent value="orders-and-transactions">
           <UserOrdersAndTransactions />
+        </TabsContent>
+        <TabsContent value="finance">
+          <UserFinance />
+        </TabsContent>
+        <TabsContent value="tickets">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-start">
+            <UserTicketsCard className="lg:col-span-2" />
+            <ComplaintsAndModerationCard />
+          </div>
         </TabsContent>
       </Tabs>
     </>

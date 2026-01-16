@@ -81,9 +81,16 @@ function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+function CardHeaderRow({className, ...props}: React.ComponentProps<"div">) {
+  return(
+    <div data-slot="card-header-row" className={cn("flex items-center justify-between gap-3 flex-wrap", className)} {...props} />
+  )
+}
+
 export {
   Card,
   CardHeader,
+  CardHeaderRow, 
   CardFooter,
   CardTitle,
   CardAction,
