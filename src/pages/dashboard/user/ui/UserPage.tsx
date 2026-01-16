@@ -2,6 +2,7 @@ import { UserCard } from "@/entities/user";
 import { PageBreadCrumbs } from "@/shared/ui/page-breadcrumbs";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/ui/tabs";
 import { UserContent } from "@/widgets/user-content";
+import { UserOrdersAndTransactions } from "@/widgets/user-orders-and-transactions";
 import { UserOverview } from "@/widgets/user-overview";
 import { UserProfileAndAccess } from "@/widgets/user-profile-and-access";
 import { useParams } from "react-router-dom";
@@ -45,6 +46,9 @@ export const UserPage = () => {
         </TabsContent>
         <TabsContent value="content">
           <UserContent />
+        </TabsContent>
+        <TabsContent value="orders-and-transactions">
+          <UserOrdersAndTransactions />
         </TabsContent>
       </Tabs>
     </>
