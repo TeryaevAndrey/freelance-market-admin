@@ -2,6 +2,9 @@ import { UserCard } from "@/entities/user";
 import { PageBreadCrumbs } from "@/shared/ui/page-breadcrumbs";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/ui/tabs";
 import { ComplaintsAndModerationCard } from "@/widgets/complaints-and-moderation-card";
+import { LoggingOfActionsCard } from "@/widgets/logging-of-actions-card";
+import { NoteFeedCard } from "@/widgets/note-feed-card";
+import { TemplatesCard } from "@/widgets/templates-card";
 import { UserContent } from "@/widgets/user-content";
 import { UserFinance } from "@/widgets/user-finance";
 import { UserOrdersAndTransactions } from "@/widgets/user-orders-and-transactions";
@@ -60,6 +63,17 @@ export const UserPage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-start">
             <UserTicketsCard className="lg:col-span-2" />
             <ComplaintsAndModerationCard />
+          </div>
+        </TabsContent>
+        <TabsContent value="logs">
+          <div className="grid grid-cols-1 items-start gap-4">
+            <LoggingOfActionsCard />
+          </div>
+        </TabsContent>
+        <TabsContent value="notes">
+          <div className="grid grid-cols-1 lg:grid-cols-3 items-start gap-4">
+            <NoteFeedCard className="lg:col-span-2" />
+            <TemplatesCard />
           </div>
         </TabsContent>
       </Tabs>
