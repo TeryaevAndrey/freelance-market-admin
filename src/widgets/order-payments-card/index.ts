@@ -1,0 +1,1 @@
+export {OrderPaymentsCard} from "./ui/OrderPaymentsCard";

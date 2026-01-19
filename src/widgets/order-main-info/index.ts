@@ -1,0 +1,1 @@
+export {OrderMainInfo} from "./ui/OrderMainInfo";

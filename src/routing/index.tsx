@@ -7,6 +7,7 @@ import { OrdersPage } from "@/pages/dashboard/orders";
 import { ModerationPage } from "@/pages/dashboard/moderation";
 import { TicketsPage } from "@/pages/dashboard/tickets";
 import { UserPage } from "@/pages/dashboard/user";
+import { OrderPage } from "@/pages/dashboard/order";
 
 export const Routing = () => {
   return (
@@ -24,6 +25,7 @@ export const Routing = () => {
         <Route path="/dashboard/users" element={<UsersPage />} />
         <Route path="/dashboard/users/:id" element={<UserPage />} />
         <Route path="/dashboard/orders" element={<OrdersPage />} />
+        <Route path="/dashboard/orders/:id" element={<OrderPage />} />
         <Route path="/dashboard/moderation" element={<ModerationPage />} />
         <Route path="/dashboard/tickets" element={<TicketsPage />} />
       </Route>
