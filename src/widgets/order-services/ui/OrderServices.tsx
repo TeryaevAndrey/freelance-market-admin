@@ -76,12 +76,12 @@ export const OrderServices = ({ className }: Props) => {
           </TableBody>
         </Table>
 
-        <div className="flex justify-between items-center gap-4 mt-4 lg:mt-6">
+        <div className="flex flex-col md:flex-row md:justify-between items-center gap-4 mt-4 lg:mt-6">
           <Text className="opacity-50" size="xs">
             Подсказка: родительский заказ может быть частично оплачен, даже если
             отдельные услуги уже закрыты.
           </Text>
-          <Button variant="outline" size="sm" asChild>
+          <Button className="max-md:w-full" variant="outline" size="sm" asChild>
             <Link to="/dashboard/orders/1">Открыть карточку заказа</Link>
           </Button>
         </div>

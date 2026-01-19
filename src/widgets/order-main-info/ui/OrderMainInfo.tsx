@@ -12,7 +12,7 @@ export const OrderMainInfo = () => {
           <div className="flex flex-col gap-1">
             <CardTitle>PM-240125-00182</CardTitle>
             <Text size="default" color="foreground" weight="semibold">Свадьба Ивана и Марии</Text>
-            <div className="flex items-center gap-4 flex-wrap">
+            <div className="flex items-center gap-2 lg:gap-4 flex-wrap">
                 <Text  size="sm" color="foreground">
               Создан: 20.12.2025
             </Text>
@@ -22,10 +22,10 @@ export const OrderMainInfo = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-4 flex-wrap">
+          <div className="max-lg:w-full flex flex-col sm:flex-row items-center gap-4 flex-wrap">
             <PaidFor totalPrice={265000} paid={70000} />
 
-            <Button variant="outline" size="sm">
+            <Button className="max-sm:w-full" variant="outline" size="sm">
               <MessageSquareText />
               <span>Диалоги</span>
             </Button>
