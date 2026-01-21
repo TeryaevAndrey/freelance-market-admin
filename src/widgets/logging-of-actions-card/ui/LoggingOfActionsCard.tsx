@@ -32,57 +32,44 @@ export const LoggingOfActionsCard = () => {
           <TableHeader>
             <TableRow>
               <TableHead>Дата</TableHead>
+              <TableHead>User ID</TableHead>
               <TableHead>Событие</TableHead>
               <TableHead>Контекст</TableHead>
-              <TableHead>Риск</TableHead>
-              <TableHead>Действие</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             <TableRow>
               <TableCell>14.01.2026 09:11</TableCell>
+              <TableCell>
+                <div className="flex items-center gap-2">
+                  <span>123213232</span>
+                  <Badge variant="outline">Admin</Badge>
+                </div>
+              </TableCell>
               <TableCell>Вход в систему</TableCell>
               <TableCell>IP 185.xxx.xxx.xxx</TableCell>
-              <TableCell>
-                <Badge variant="outline">
-                  <KeyRound /> Ok
-                </Badge>
-              </TableCell>
-              <TableCell>
-                <Button variant="outline" size="sm">
-                  Цепочка
-                </Button>
-              </TableCell>
             </TableRow>
             <TableRow>
               <TableCell>14.01.2026 09:11</TableCell>
+              <TableCell>
+                <div className="flex items-center gap-2">
+                  <span>123213232</span>
+                  <Badge variant="outline">Admin</Badge>
+                </div>
+              </TableCell>
               <TableCell>Вход в систему</TableCell>
               <TableCell>IP 185.xxx.xxx.xxx</TableCell>
-              <TableCell>
-                <Badge variant="outline">
-                  <KeyRound /> Ok
-                </Badge>
-              </TableCell>
-              <TableCell>
-                <Button variant="outline" size="sm">
-                  Цепочка
-                </Button>
-              </TableCell>
             </TableRow>
             <TableRow>
               <TableCell>14.01.2026 09:11</TableCell>
+              <TableCell>
+                <div className="flex items-center gap-2">
+                  <span>123213232</span>
+                  <Badge variant="outline">Admin</Badge>
+                </div>
+              </TableCell>
               <TableCell>Вход в систему</TableCell>
               <TableCell>IP 185.xxx.xxx.xxx</TableCell>
-              <TableCell>
-                <Badge variant="outline">
-                  <KeyRound /> Ok
-                </Badge>
-              </TableCell>
-              <TableCell>
-                <Button variant="outline" size="sm">
-                  Цепочка
-                </Button>
-              </TableCell>
             </TableRow>
           </TableBody>
         </Table>

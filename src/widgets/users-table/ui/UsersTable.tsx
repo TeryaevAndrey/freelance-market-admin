@@ -20,8 +20,11 @@ import {
 } from "@/shared/ui/table";
 import { Text } from "@/shared/ui/text";
 import { Ban, LogOut, MessageSquareMore, Trash, UserCog } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export const UsersTable = () => {
+  const navigate = useNavigate();
+
   return (
     <Card>
       <CardHeader>
@@ -47,7 +50,7 @@ export const UsersTable = () => {
           </TableHeader>
           <TableBody>
             {new Array(10).fill(1).map((_, index) => (
-              <TableRow className="cursor-pointer" key={index}>
+              <TableRow className="cursor-pointer" key={index} onClick={() => navigate("/dashboard/users/2")}>
                 <TableCell>#10421</TableCell>
                 <TableCell>
                   <div className="flex items-center gap-2">

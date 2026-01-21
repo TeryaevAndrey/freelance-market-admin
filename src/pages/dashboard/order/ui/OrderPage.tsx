@@ -31,7 +31,7 @@ export const OrderPage = () => {
           <TabsTrigger value="logs">Логи</TabsTrigger>
         </TabsList>
         <TabsContent value="order">
-          <OrderServices />
+          <OrderServices withFooter={false} />
         </TabsContent>
         <TabsContent value="finance">
           <OrderPaymentsCard />

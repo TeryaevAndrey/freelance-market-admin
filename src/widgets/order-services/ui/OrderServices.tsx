@@ -21,9 +21,11 @@ import { Text } from "@/shared/ui/text";
 import type { HTMLAttributes } from "react";
 import { Link } from "react-router-dom";
 
-interface Props extends HTMLAttributes<HTMLDivElement> {}
+interface Props extends HTMLAttributes<HTMLDivElement> {
+  withFooter?: boolean;
+}
 
-export const OrderServices = ({ className }: Props) => {
+export const OrderServices = ({ className, withFooter = true }: Props) => {
   return (
     <Card className={cn(className)}>
       <CardHeader>
@@ -36,6 +38,7 @@ export const OrderServices = ({ className }: Props) => {
         <Table>
           <TableHeader>
             <TableRow>
+              <TableHead>Категория</TableHead>
               <TableHead>Номер услуги</TableHead>
               <TableHead>Название услуги</TableHead>
               <TableHead>Доп.услуги</TableHead>
@@ -47,6 +50,7 @@ export const OrderServices = ({ className }: Props) => {
           <TableBody>
             {new Array(5).fill(1).map((_, index) => (
               <TableRow key={index}>
+                <TableCell>Название категории</TableCell>
                 <TableCell>S-91821</TableCell>
                 <TableCell>
                   <div className="flex flex-col">
@@ -59,9 +63,15 @@ export const OrderServices = ({ className }: Props) => {
                   </div>
                 </TableCell>
                 <TableCell>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="outline">DJ-сет</Badge>
-                    <Badge variant="outline">Сценарий под ключ</Badge>
+                  <div className="flex flex-col gap-1">
+                    <div className="flex items-center gap-2">
+                      <Badge variant="outline">DJ-сет</Badge>
+                      <span>- 10 000 Р</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Badge variant="outline">Сценарий под ключ</Badge>
+                      <span>- 20 000 Р</span>
+                    </div>
                   </div>
                 </TableCell>
                 <TableCell>95 000 Р</TableCell>
@@ -76,15 +86,22 @@ export const OrderServices = ({ className }: Props) => {
           </TableBody>
         </Table>
 
-        <div className="flex flex-col md:flex-row md:justify-between items-center gap-4 mt-4 lg:mt-6">
-          <Text className="opacity-50" size="xs">
-            Подсказка: родительский заказ может быть частично оплачен, даже если
-            отдельные услуги уже закрыты.
-          </Text>
-          <Button className="max-md:w-full" variant="outline" size="sm" asChild>
-            <Link to="/dashboard/orders/1">Открыть карточку заказа</Link>
-          </Button>
-        </div>
+        {withFooter && (
+          <div className="flex flex-col md:flex-row md:justify-between items-center gap-4 mt-4 lg:mt-6">
+            <Text className="opacity-50" size="xs">
+              Подсказка: родительский заказ может быть частично оплачен, даже
+              если отдельные услуги уже закрыты.
+            </Text>
+            <Button
+              className="max-md:w-full"
+              variant="outline"
+              size="sm"
+              asChild
+            >
+              <Link to="/dashboard/orders/1">Открыть карточку заказа</Link>
+            </Button>
+          </div>
+        )}
       </CardContent>
     </Card>
   );
