@@ -1,6 +1,5 @@
 import { LogsFilters } from "@/features/logs-filters";
 import { Badge } from "@/shared/ui/badge";
-import { Button } from "@/shared/ui/button";
 import {
   Card,
   CardContent,
@@ -16,7 +15,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/shared/ui/table";
-import { KeyRound } from "lucide-react";
 
 export const LoggingOfActionsCard = () => {
   return (
