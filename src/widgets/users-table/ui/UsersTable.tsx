@@ -1,3 +1,4 @@
+import { AddUserModal } from "@/features/user-add";
 import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/avatar";
 import { Badge } from "@/shared/ui/badge";
 import { Button } from "@/shared/ui/button";
@@ -28,10 +29,16 @@ export const UsersTable = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Пользователи</CardTitle>
-        <CardDescription>
-          Клик по строке открывает карточку пользователя
-        </CardDescription>
+       <div className="flex items-center justify-between gap-3 flex-wrap">
+         <div className="flex flex-col gap-2">
+          <CardTitle>Пользователи</CardTitle>
+          <CardDescription>
+            Клик по строке открывает карточку пользователя
+          </CardDescription>
+        </div>
+
+        <AddUserModal />
+       </div>
       </CardHeader>
       <CardContent>
         <Table>
@@ -50,7 +57,11 @@ export const UsersTable = () => {
           </TableHeader>
           <TableBody>
             {new Array(10).fill(1).map((_, index) => (
-              <TableRow className="cursor-pointer" key={index} onClick={() => navigate("/dashboard/users/2")}>
+              <TableRow
+                className="cursor-pointer"
+                key={index}
+                onClick={() => navigate("/dashboard/users/2")}
+              >
                 <TableCell>#10421</TableCell>
                 <TableCell>
                   <div className="flex items-center gap-2">
