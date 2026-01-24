@@ -1,4 +1,5 @@
 import { UserCard } from "@/entities/user";
+import { EditUserModal } from "@/features/user-edit";
 import { PageBreadCrumbs } from "@/shared/ui/page-breadcrumbs";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/ui/tabs";
 import { ComplaintsAndModerationCard } from "@/widgets/complaints-and-moderation-card";
@@ -32,7 +33,8 @@ export const UserPage = () => {
       <UserCard />
 
       <Tabs defaultValue="overview">
-        <TabsList>
+        <div className="flex justify-between items-center gap-3 flex-wrap">
+          <TabsList>
           <TabsTrigger value="overview">Обзор</TabsTrigger>
           <TabsTrigger value="profile-and-access">Профиль и доступ</TabsTrigger>
           <TabsTrigger value="content">Контент</TabsTrigger>
@@ -44,6 +46,9 @@ export const UserPage = () => {
           <TabsTrigger value="logs">Логирование</TabsTrigger>
           <TabsTrigger value="notes">Заметки</TabsTrigger>
         </TabsList>
+
+        <EditUserModal />
+        </div>
         <TabsContent value="overview">
           <UserOverview />
         </TabsContent>
