@@ -1,0 +1,1 @@
+export {UserLegalInfoCard} from "./ui/UserLegalInfoCard";

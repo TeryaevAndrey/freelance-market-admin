@@ -1,0 +1,1 @@
+export {UserAdditionalDataCard} from "./ui/UserAdditionalDataCard";

@@ -20,7 +20,8 @@ import {
   TableRow,
 } from "@/shared/ui/table";
 import { Text } from "@/shared/ui/text";
-import { Ban, LogOut, MessageSquareMore, Trash, UserCog } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/ui/tooltip";
+import { Ban, LogOut, MessageSquareMore } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export const UsersTable = () => {
@@ -29,16 +30,16 @@ export const UsersTable = () => {
   return (
     <Card>
       <CardHeader>
-       <div className="flex items-center justify-between gap-3 flex-wrap">
-         <div className="flex flex-col gap-2">
-          <CardTitle>Пользователи</CardTitle>
-          <CardDescription>
-            Клик по строке открывает карточку пользователя
-          </CardDescription>
-        </div>
+        <div className="flex items-center justify-between gap-3 flex-wrap">
+          <div className="flex flex-col gap-2">
+            <CardTitle>Пользователи</CardTitle>
+            <CardDescription>
+              Клик по строке открывает карточку пользователя
+            </CardDescription>
+          </div>
 
-        <AddUserModal />
-       </div>
+          <AddUserModal />
+        </div>
       </CardHeader>
       <CardContent>
         <Table>
@@ -90,21 +91,32 @@ export const UsersTable = () => {
                 <TableCell>18.11.2025</TableCell>
                 <TableCell>
                   <div className="flex items-center justify-end gap-2">
-                    <Button variant="secondary" size="icon-sm">
-                      <UserCog />
-                    </Button>
-                    <Button variant="secondary" size="icon-sm">
-                      <MessageSquareMore />
-                    </Button>
-                    <Button variant="destructive" size="icon-sm">
-                      <Ban />
-                    </Button>
-                    <Button variant="secondary" size="icon-sm">
-                      <LogOut />
-                    </Button>
-                    <Button variant="destructive" size="icon-sm">
-                      <Trash />
-                    </Button>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button variant="secondary" size="icon-sm">
+                          <MessageSquareMore />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>Диалоги</TooltipContent>
+                    </Tooltip>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button variant="destructive" size="icon-sm">
+                          <Ban />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>Заблокировать</TooltipContent>
+                    </Tooltip>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button variant="secondary" size="icon-sm">
+                          <LogOut />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent align="end">
+                        Выйти из всех сессий
+                      </TooltipContent>
+                    </Tooltip>
                   </div>
                 </TableCell>
               </TableRow>
