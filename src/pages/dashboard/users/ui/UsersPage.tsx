@@ -1,9 +1,30 @@
-import { UserStatsCards } from "@/entities/user";
-import { UserFilters } from "@/features/user-filters";
+import { userQueries, UserStatsCards } from "@/entities/user";
+import type { USER_ROLES, USER_STATUSES } from "@/entities/user";
+import {
+  UserFilters,
+  useUserFiltersSearchParams,
+} from "@/features/user-filters";
 import { PageBreadCrumbs } from "@/shared/ui/page-breadcrumbs";
 import { UsersTable } from "@/widgets/users-table";
+import { useQuery } from "@tanstack/react-query";
 
 export const UsersPage = () => {
+  const [userFilters] = useUserFiltersSearchParams();
+  const { data: users, isLoading } = useQuery(
+    userQueries.list({
+      ...userFilters,
+      role:
+        userFilters.role === "all"
+          ? undefined
+          : (userFilters.role as unknown as USER_ROLES),
+      status:
+        userFilters.status === "all"
+          ? undefined
+          : (userFilters.status as unknown as USER_STATUSES),
+      city: userFilters.city === "all" ? undefined : userFilters.city,
+    }),
+  );
+
   return (
     <>
       <PageBreadCrumbs
@@ -22,7 +43,7 @@ export const UsersPage = () => {
         }}
       />
       <UserFilters />
-      <UsersTable />
+      <UsersTable data={users} isLoading={isLoading} />
     </>
   );
 };

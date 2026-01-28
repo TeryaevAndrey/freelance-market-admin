@@ -19,8 +19,8 @@ export const SignInForm = () => {
 
   const onSubmit = (data: FormSchema) => {
     mutate({
-      email: data.username,
-      password: data.password,
+      username: data.username,
+      password: data.password
     });
   };
 
