@@ -2,15 +2,15 @@ import { axiosInstance } from "@/shared/api/base";
 import type { GetUsersParams, GetUsersResponse, User } from "../model/types";
 
 export const userApi = {
-  getUsersList: (params: GetUsersParams) =>
-    axiosInstance
-      .get<GetUsersResponse>("/accounts/list/", {
-        params,
-      })
-      .then((res) => res.data),
+  getUsersList: async (params: GetUsersParams): Promise<GetUsersResponse> => {
+    const response = await axiosInstance.get<GetUsersResponse>("/accounts/list/", {
+      params,
+    });
+    return response.data;
+  },
 
-  getUserById: (id: number) =>
-    axiosInstance
-      .get<User>(`/accounts/${id}/retrieve/`)
-      .then((res) => res.data),
+  getUserById: async (id: number): Promise<User> => {
+    const response = await axiosInstance.get<User>(`/accounts/${id}/retrieve/`);
+    return response.data;
+  },
 };
