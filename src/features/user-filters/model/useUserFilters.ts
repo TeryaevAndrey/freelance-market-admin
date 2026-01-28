@@ -1,21 +1,14 @@
 import { useForm } from "react-hook-form";
 import type { UserFiltersState } from "./types";
-import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDebounce } from "use-debounce";
+import { useUserFiltersSearchParams } from "./useUserFiltersSearchParams";
 
 export const useUserFilters = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParameters, setSearchParams] = useUserFiltersSearchParams();
 
   const form = useForm<UserFiltersState>({
-    defaultValues: {
-      query: searchParams.get("query") || "",
-      role: searchParams.get("role") || "all",
-      status: searchParams.get("status") || "all",
-      city: searchParams.get("city") || "all",
-      dateFrom: searchParams.get("dateFrom") || "",
-      dateTo: searchParams.get("dateTo") || "",
-    },
+    defaultValues: searchParameters,
   });
 
   const watchAll = form.watch();
