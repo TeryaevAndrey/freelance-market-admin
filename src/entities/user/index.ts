@@ -7,3 +7,6 @@ export { RolesAndAccessCard } from "./ui/RolesAndAccessCard";
 export { StatusesHistoryCard } from "./ui/StatusesHistoryCard";
 export { PublicLinksCard } from "./ui/PublicLinksCard";
 export { ServicesCard } from "./ui/ServicesCard";
+
+export {userQueries} from "./api/user.queries";
+export type {User} from "./model/types";

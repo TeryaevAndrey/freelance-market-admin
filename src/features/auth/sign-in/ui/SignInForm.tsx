@@ -6,35 +6,19 @@ import {
   FormLabel,
   FormMessage,
 } from "@/shared/ui/form";
-import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import type { FormSchema } from "../model/form-schema";
 import { Input } from "@/shared/ui/input";
 import { Button } from "@/shared/ui/button";
-import { axiosInstance } from "@/shared/api/base";
-import type { SignInParams, SignInResponse } from "../model/types";
+import { useSignIn } from "../model/useSignIn";
 
 export const SignInForm = () => {
   const form = useForm<FormSchema>();
-  const navigate = useNavigate();
 
-  const signInMutation = useMutation({
-    mutationFn: async (params: SignInParams) => {
-      const { data } = await axiosInstance.post<SignInResponse>(
-        "/accounts/login",
-        params
-      );
-      return data;
-    },
-    onSuccess: (data) => {
-      localStorage.setItem("token", data.token);
-      navigate("/dashboard");
-    },
-  });
+  const { mutate, isPending } = useSignIn();
 
   const onSubmit = (data: FormSchema) => {
-    signInMutation.mutate({
+    mutate({
       email: data.username,
       password: data.password,
     });
@@ -76,12 +60,8 @@ export const SignInForm = () => {
           />
         </div>
 
-        <Button
-          className="w-full mt-6"
-          type="submit"
-          disabled={signInMutation.isPending}
-        >
-          Войти
+        <Button className="w-full mt-6" type="submit" disabled={isPending}>
+          {isPending ? "Вход..." : "Войти"}
         </Button>
       </form>
     </Form>
