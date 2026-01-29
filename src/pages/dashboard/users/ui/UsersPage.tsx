@@ -4,15 +4,23 @@ import {
   UserFilters,
   useUserFiltersSearchParams,
 } from "@/features/user-filters";
+import { DEFAULT_PAGE_SIZE } from "@/shared/constants/pagination.constants";
 import { PageBreadCrumbs } from "@/shared/ui/page-breadcrumbs";
 import { UsersTable } from "@/widgets/users-table";
 import { useQuery } from "@tanstack/react-query";
+import { useSearchParams } from "react-router-dom";
 
 export const UsersPage = () => {
+  const [searchParams] = useSearchParams();
   const [userFilters] = useUserFiltersSearchParams();
+
+  const currentPage = Number(searchParams.get("page")) || 1;
+
   const { data: users, isLoading } = useQuery(
     userQueries.list({
       ...userFilters,
+      page: currentPage,
+      page_size: DEFAULT_PAGE_SIZE,
       role:
         userFilters.role === "all"
           ? undefined
@@ -43,7 +51,7 @@ export const UsersPage = () => {
         }}
       />
       <UserFilters />
-      <UsersTable data={users} isLoading={isLoading} />
+      <UsersTable data={users?.results} isLoading={isLoading} totalCount={users?.count || 0} pageSize={DEFAULT_PAGE_SIZE} />
     </>
   );
 };

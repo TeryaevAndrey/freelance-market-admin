@@ -11,8 +11,14 @@ export const useUserFilters = () => {
     defaultValues: searchParameters,
   });
 
-  const watchAll = form.watch();
+  const { watch, reset } = form;
+  const watchAll = watch();
   const [debouncedFilter] = useDebounce(watchAll, 500);
+
+  useEffect(() => {
+    // Обновляем поля формы, если URL изменился (например, при нажатии "Назад")
+    reset(searchParameters);
+  }, [searchParameters, reset]);
 
   useEffect(() => {
     const params = new URLSearchParams();

@@ -1,4 +1,4 @@
-import type { WithNull } from "@/shared/types/main-types";
+import type { PaginationParams, PaginationResponse, WithNull } from "@/shared/types/main-types";
 
 export enum USER_ROLES {
   "ADMIN" = 0,
@@ -75,7 +75,7 @@ export interface User {
   user_permissions?: number[];
 }
 
-export interface GetUsersParams {
+export interface GetUsersParams extends PaginationParams {
   city?: string;
   date_created_after?: string;
   date_created_before?: string;
@@ -86,4 +86,6 @@ export interface GetUsersParams {
   status?: USER_STATUSES;
 }
 
-export type GetUsersResponse = User[];
+export interface GetUsersResponse extends PaginationResponse {
+  results: User[];
+}

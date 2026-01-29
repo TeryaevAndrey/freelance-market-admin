@@ -1,5 +1,6 @@
 import { getFullName, type User } from "@/entities/user";
 import { AddUserModal } from "@/features/user-add";
+import { DEFAULT_PAGE_SIZE } from "@/shared/constants/pagination.constants";
 import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/avatar";
 import { Badge } from "@/shared/ui/badge";
 import { Button } from "@/shared/ui/button";
@@ -30,9 +31,11 @@ import { useNavigate } from "react-router-dom";
 interface Props extends HTMLAttributes<HTMLDivElement> {
   data?: User[];
   isLoading?: boolean;
+  totalCount?: number;
+  pageSize?: number;
 }
 
-export const UsersTable = ({ data = [], isLoading = false }: Props) => {
+export const UsersTable = ({ data = [], isLoading = false, totalCount = 0, pageSize = DEFAULT_PAGE_SIZE }: Props) => {
   const navigate = useNavigate();
   const isEmpty = !isLoading && data.length === 0;
 
@@ -158,7 +161,7 @@ export const UsersTable = ({ data = [], isLoading = false }: Props) => {
 
       {!isEmpty && !isLoading && (
         <CardFooter>
-          <PagePagination />
+          <PagePagination totalCount={totalCount} pageSize={pageSize} />
         </CardFooter>
       )}
     </Card>
