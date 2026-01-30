@@ -1,4 +1,8 @@
-import type { PaginationParams, PaginationResponse, WithNull } from "@/shared/types/main-types";
+import type {
+  PaginationParams,
+  PaginationResponse,
+  WithNull,
+} from "@/shared/types/main-types";
 
 export enum USER_ROLES {
   "ADMIN" = 0,
@@ -15,14 +19,23 @@ export enum LEGAL_STATUSES {
   "BUSINESS_SOCIETY" = 3,
 }
 
-export interface USER_STATUSES {
-  DRAFT: 0;
-  CONFIRMED: 1;
-  PUBLISHED: 2;
-  HIDDEN: 3;
-  FROZEN: 4;
-  BLOCKED: 5;
+export enum USER_STATUSES {
+  DRAFT = 0,
+  CONFIRMED = 1,
+  PUBLISHED = 2,
+  HIDDEN = 3,
+  FROZEN = 4,
+  BLOCKED = 5,
 }
+
+export const USER_STATUS_NAMES: Record<USER_STATUSES, string> = {
+  [USER_STATUSES.DRAFT]: "Черновик",
+  [USER_STATUSES.CONFIRMED]: "Подтвержден",
+  [USER_STATUSES.PUBLISHED]: "Опубликован",
+  [USER_STATUSES.HIDDEN]: "Скрыт",
+  [USER_STATUSES.FROZEN]: "Заморожен",
+  [USER_STATUSES.BLOCKED]: "Заблокирован",
+};
 
 export interface User {
   id: number;

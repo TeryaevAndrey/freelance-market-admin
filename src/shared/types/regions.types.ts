@@ -1,3 +1,5 @@
+import type { PaginationResponse } from "./main-types";
+
 export interface City {
   id: number;
   name: string;
@@ -9,4 +11,6 @@ export interface Region {
   cities: City[];
 }
 
-export type GetRegionsResponse = Region[];
+export interface GetRegionsResponse extends PaginationResponse {
+  results: Region[]
+}

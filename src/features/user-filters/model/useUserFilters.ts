@@ -11,15 +11,21 @@ export const useUserFilters = () => {
     defaultValues: searchParameters,
   });
 
-  const { watch, reset } = form;
+  const { watch, reset, getValues } = form;
   const watchAll = watch();
   const [debouncedFilter] = useDebounce(watchAll, 500);
 
+  // 1. СИНХРОНИЗАЦИЯ: URL -> ФОРМА
   useEffect(() => {
-    // Обновляем поля формы, если URL изменился (например, при нажатии "Назад")
-    reset(searchParameters);
-  }, [searchParameters, reset]);
+    const currentFormValues = getValues();
+    const isDifferent = JSON.stringify(searchParameters) !== JSON.stringify(currentFormValues);
 
+    if (isDifferent) {
+      reset(searchParameters);
+    }
+  }, [searchParameters, reset, getValues]);
+
+  // 2. СИНХРОНИЗАЦИЯ: ФОРМА -> URL
   useEffect(() => {
     const params = new URLSearchParams();
 
@@ -29,9 +35,16 @@ export const useUserFilters = () => {
       }
     });
 
+    // Важно: проверяем, не пытаемся ли мы установить те же параметры, что уже есть в URL
+    // чтобы не провоцировать лишние ререндеры
+    const currentParamsString = new URLSearchParams(window.location.search).toString();
+    
+    // Всегда сбрасываем страницу на 1 при изменении фильтров
     params.set("page", "1");
 
-    setSearchParams(params, { replace: true });
+    if (params.toString() !== currentParamsString) {
+      setSearchParams(params, { replace: true });
+    }
   }, [debouncedFilter, setSearchParams]);
 
   return form;

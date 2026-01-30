@@ -3,9 +3,12 @@ import type { GetUsersParams, GetUsersResponse, User } from "../model/types";
 
 export const userApi = {
   getUsersList: async (params: GetUsersParams): Promise<GetUsersResponse> => {
-    const response = await axiosInstance.get<GetUsersResponse>("/accounts/list/", {
-      params,
-    });
+    const response = await axiosInstance.get<GetUsersResponse>(
+      "/accounts/list/",
+      {
+        params,
+      },
+    );
     return response.data;
   },
 

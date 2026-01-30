@@ -17,10 +17,15 @@ export const SignInForm = () => {
 
   const { mutate, isPending } = useSignIn();
 
+  const username = form.watch("username");
+  const password = form.watch("password");
+
+  const isFieldsFilled = username && password;
+
   const onSubmit = (data: FormSchema) => {
     mutate({
       username: data.username,
-      password: data.password
+      password: data.password,
     });
   };
 
@@ -60,7 +65,7 @@ export const SignInForm = () => {
           />
         </div>
 
-        <Button className="w-full mt-6" type="submit" disabled={isPending}>
+        <Button className="w-full mt-6" type="submit" disabled={isPending || !isFieldsFilled}>
           {isPending ? "Вход..." : "Войти"}
         </Button>
       </form>

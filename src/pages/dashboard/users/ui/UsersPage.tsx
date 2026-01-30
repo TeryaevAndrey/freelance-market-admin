@@ -15,12 +15,13 @@ export const UsersPage = () => {
   const [userFilters] = useUserFiltersSearchParams();
 
   const currentPage = Number(searchParams.get("page")) || 1;
+  const pageSize = Number(searchParams.get("pageSize")) || DEFAULT_PAGE_SIZE;
 
   const { data: users, isLoading } = useQuery(
     userQueries.list({
       ...userFilters,
       page: currentPage,
-      page_size: DEFAULT_PAGE_SIZE,
+      page_size: pageSize,
       role:
         userFilters.role === "all"
           ? undefined
@@ -51,7 +52,12 @@ export const UsersPage = () => {
         }}
       />
       <UserFilters />
-      <UsersTable data={users?.results} isLoading={isLoading} totalCount={users?.count || 0} pageSize={DEFAULT_PAGE_SIZE} />
+      <UsersTable
+        data={users?.results}
+        isLoading={isLoading}
+        totalCount={users?.count || 0}
+        pageSize={DEFAULT_PAGE_SIZE}
+      />
     </>
   );
 };

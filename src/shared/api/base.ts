@@ -23,7 +23,7 @@ axiosInstance.interceptors.request.use((config) => {
   const token = localStorage.getItem('token'); // Или получение из вашего Store (Zustand/Redux)
   
   if (token && config.headers) {
-    config.headers.Authorization = `Bearer ${token}`;
+    config.headers.Authorization = `Token ${token}`;
   }
   
   return config;

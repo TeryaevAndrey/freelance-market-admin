@@ -1,6 +1,13 @@
-import { getFullName, type User } from "@/entities/user";
+import { getCityById, getCityId } from "@/entities/region";
+import {
+  getAbbrName,
+  getFullName,
+  getUserStatusName,
+  type User,
+} from "@/entities/user";
 import { AddUserModal } from "@/features/user-add";
 import { DEFAULT_PAGE_SIZE } from "@/shared/constants/pagination.constants";
+import { useRegions } from "@/shared/contexts/RegionsContext";
 import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/avatar";
 import { Badge } from "@/shared/ui/badge";
 import { Button } from "@/shared/ui/button";
@@ -12,6 +19,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/shared/ui/card";
+import { PageLimitSelect } from "@/shared/ui/page-limit-select";
 import { PagePagination } from "@/shared/ui/page-pagination";
 import { Skeleton } from "@/shared/ui/skeleton";
 import {
@@ -24,7 +32,8 @@ import {
 } from "@/shared/ui/table";
 import { Text } from "@/shared/ui/text";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/ui/tooltip";
-import { Ban, LogOut, MessageSquareMore } from "lucide-react";
+import { format } from "date-fns";
+import { Ban, LogOut, MessageSquareMore, User as UserIcon } from "lucide-react";
 import type { HTMLAttributes } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -35,9 +44,28 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   pageSize?: number;
 }
 
-export const UsersTable = ({ data = [], isLoading = false, totalCount = 0, pageSize = DEFAULT_PAGE_SIZE }: Props) => {
+export const UsersTable = ({
+  data = [],
+  isLoading = false,
+  totalCount = 0,
+  pageSize = DEFAULT_PAGE_SIZE,
+}: Props) => {
+  const {cities} = useRegions();
   const navigate = useNavigate();
   const isEmpty = !isLoading && data.length === 0;
+
+  const getCitiesNames = (userCities:   string[] = []) => { 
+    const formattedCities = userCities.map((userCity) => {
+      const userCityId = getCityId(userCity);
+      const city = getCityById(Number(userCityId), cities);
+
+      console.log(userCityId, city);
+
+      return city?.name
+    }).filter((city) => city !== undefined).join(", ");
+
+    return formattedCities
+  };
 
   return (
     <Card>
@@ -100,29 +128,59 @@ export const UsersTable = ({ data = [], isLoading = false, totalCount = 0, pageS
                     <div className="flex items-center gap-2">
                       <Avatar>
                         <AvatarImage src="/" alt="/" />
-                        <AvatarFallback>TT</AvatarFallback>
+                        <AvatarFallback>
+                          {user.first_name || user.third_name ? (
+                            getAbbrName(user.first_name, user.third_name)
+                          ) : (
+                            <UserIcon size={16} />
+                          )}
+                        </AvatarFallback>
                       </Avatar>
 
                       <Text size="default">
-                        {getFullName(user.first_name, user.last_name)}
+                        {getFullName(user.first_name, user.last_name) || "-"}
                       </Text>
                     </div>
                   </TableCell>
-                  <TableCell>Клиент</TableCell>
+                  <TableCell>{user.role}</TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-2">
-                      <Badge variant="outline">+7 (***) ***-12-90</Badge>
-                      <Badge variant="outline">mail@mail.ru</Badge>
-                    </div>
+                    {user.phone_number ||
+                      user.phone_number2 ||
+                      (user.email ? (
+                        <div className="flex items-center gap-2">
+                          {(user.phone_number || user.phone_number2) && (
+                            <Badge variant="outline">
+                              {[user.phone_number, user.phone_number2]
+                                .filter((el) => Boolean(el))
+                                .join(", ")}
+                            </Badge>
+                          )}
+                          {user.email && (
+                            <Badge variant="outline">{user.email}</Badge>
+                          )}
+                        </div>
+                      ) : (
+                        "-"
+                      ))}
                   </TableCell>
-                  <TableCell>Курск</TableCell>
+                  <TableCell>
+                    {user.cities.length > 0 ? getCitiesNames(user.cities) : "-"}
+                  </TableCell>
                   <TableCell>
                     <Badge variant="outline">12 500 Р</Badge>
                   </TableCell>
                   <TableCell>
-                    <Badge variant="default">Активен</Badge>
+                    {user.status ? (
+                      <Badge variant="default">
+                        {getUserStatusName(user.status)}
+                      </Badge>
+                    ) : (
+                      "-"
+                    )}
                   </TableCell>
-                  <TableCell>18.11.2025</TableCell>
+                  <TableCell>
+                    {format(new Date(user.date_created), "dd.MM.yyyy")}
+                  </TableCell>
                   <TableCell>
                     <div className="flex items-center justify-end gap-2">
                       <Tooltip>
@@ -161,6 +219,7 @@ export const UsersTable = ({ data = [], isLoading = false, totalCount = 0, pageS
 
       {!isEmpty && !isLoading && (
         <CardFooter>
+          <PageLimitSelect />
           <PagePagination totalCount={totalCount} pageSize={pageSize} />
         </CardFooter>
       )}

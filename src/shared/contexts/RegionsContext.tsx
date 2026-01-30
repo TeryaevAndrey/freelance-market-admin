@@ -27,7 +27,7 @@ export const RegionsProvider = ({ children }: Props) => {
   const { data: regions } = useQuery(regionsQueries.list());
 
   return (
-    <RegionsContext.Provider value={regions || []}>
+    <RegionsContext.Provider value={regions?.results || []}>
       {children}
     </RegionsContext.Provider>
   );

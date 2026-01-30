@@ -12,3 +12,5 @@ export {userQueries} from "./api/user.queries";
 export type {User, LEGAL_STATUSES, USER_ROLES, USER_STATUSES} from "./model/types";
 
 export {getFullName} from "./model/getFullName";
+export {getAbbrName} from "./model/getAbbrName";
+export {getUserStatusName} from "./model/getUserStatusName";
