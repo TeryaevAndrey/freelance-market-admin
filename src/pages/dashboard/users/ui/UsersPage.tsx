@@ -5,6 +5,7 @@ import {
   useUserFiltersSearchParams,
 } from "@/features/user-filters";
 import { DEFAULT_PAGE_SIZE } from "@/shared/constants/pagination.constants";
+import { useAppStore } from "@/shared/store/app.store";
 import { PageBreadCrumbs } from "@/shared/ui/page-breadcrumbs";
 import { UsersTable } from "@/widgets/users-table";
 import { useQuery } from "@tanstack/react-query";
@@ -13,9 +14,9 @@ import { useSearchParams } from "react-router-dom";
 export const UsersPage = () => {
   const [searchParams] = useSearchParams();
   const [userFilters] = useUserFiltersSearchParams();
+  const {pageSize} = useAppStore();
 
   const currentPage = Number(searchParams.get("page")) || 1;
-  const pageSize = Number(searchParams.get("pageSize")) || DEFAULT_PAGE_SIZE;
 
   const { data: users, isLoading } = useQuery(
     userQueries.list({

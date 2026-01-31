@@ -1,5 +1,5 @@
 import { queryOptions } from "@tanstack/react-query";
-import type { GetUsersParams } from "../model/types";
+import type { GetRolesParams, GetUsersParams } from "../model/types";
 import { userApi } from "./user.api";
 
 export const userQueries = {
@@ -18,5 +18,13 @@ export const userQueries = {
       queryKey: [...userQueries.detailKeys(), id] as const,
       queryFn: () => userApi.getUserById(id),
       staleTime: 5 * 60 * 1000,
+    }),
+
+  rolesKeys: () => [...userQueries.all(), "roles"] as const,
+
+  roles: (params: GetRolesParams) =>
+    queryOptions({
+      queryKey: [...userQueries.rolesKeys()] as const,
+      queryFn: () => userApi.getRoles(params),
     }),
 };

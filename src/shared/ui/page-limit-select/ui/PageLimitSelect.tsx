@@ -7,24 +7,23 @@ import {
   SelectValue,
 } from "../../select";
 import { DEFAULT_PAGE_SIZE } from "@/shared/constants/pagination.constants";
+import { useAppStore } from "@/shared/store/app.store";
 
 interface Props {
-  defaultValue?: string;
   options?: string[];
 }
 
 export const PageLimitSelect = ({
-  defaultValue = String(DEFAULT_PAGE_SIZE),
   options = ["10", "25", "50", "100"],
 }: Props) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const currentLimit = searchParams.get("pageSize") || defaultValue;
+  const [_, setSearchParams] = useSearchParams();
+  const {pageSize, setPageSize} = useAppStore();
 
   const handleLimitChange = (value: string) => {
     setSearchParams((prev) => {
       const next = new URLSearchParams(prev);
-      next.set("pageSize", value);
+      
+      setPageSize(Number(value));
       next.set("page", "1");
       return next;
     });
@@ -35,9 +34,9 @@ export const PageLimitSelect = ({
       <span className="text-sm text-muted-foreground whitespace-nowrap">
         Записей на странице:
       </span>
-      <Select value={currentLimit} onValueChange={handleLimitChange}>
+      <Select value={String(pageSize)} onValueChange={handleLimitChange}>
         <SelectTrigger className="w-[80px]">
-          <SelectValue placeholder={currentLimit} />
+          <SelectValue placeholder={pageSize} />
         </SelectTrigger>
         <SelectContent>
           {options.map((option) => (

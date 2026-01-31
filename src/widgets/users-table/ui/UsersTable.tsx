@@ -1,10 +1,6 @@
 import { getCityById, getCityId } from "@/entities/region";
-import {
-  getAbbrName,
-  getFullName,
-  getUserStatusName,
-  type User,
-} from "@/entities/user";
+import { getFullName, getUserStatusName, type User } from "@/entities/user";
+import { BlockUserButton } from "@/features/manage-user";
 import { AddUserModal } from "@/features/user-add";
 import { DEFAULT_PAGE_SIZE } from "@/shared/constants/pagination.constants";
 import { useRegions } from "@/shared/contexts/RegionsContext";
@@ -50,21 +46,24 @@ export const UsersTable = ({
   totalCount = 0,
   pageSize = DEFAULT_PAGE_SIZE,
 }: Props) => {
-  const {cities} = useRegions();
+  const { cities } = useRegions();
   const navigate = useNavigate();
   const isEmpty = !isLoading && data.length === 0;
 
-  const getCitiesNames = (userCities:   string[] = []) => { 
-    const formattedCities = userCities.map((userCity) => {
-      const userCityId = getCityId(userCity);
-      const city = getCityById(Number(userCityId), cities);
+  const getCitiesNames = (userCities: string[] = []) => {
+    const formattedCities = userCities
+      .map((userCity) => {
+        const userCityId = getCityId(userCity);
+        const city = getCityById(Number(userCityId), cities);
 
-      console.log(userCityId, city);
+        console.log(userCityId, city);
 
-      return city?.name
-    }).filter((city) => city !== undefined).join(", ");
+        return city?.name;
+      })
+      .filter((city) => city !== undefined)
+      .join(", ");
 
-    return formattedCities
+    return formattedCities;
   };
 
   return (
@@ -129,17 +128,11 @@ export const UsersTable = ({
                       <Avatar>
                         <AvatarImage src="/" alt="/" />
                         <AvatarFallback>
-                          {user.first_name || user.third_name ? (
-                            getAbbrName(user.first_name, user.third_name)
-                          ) : (
-                            <UserIcon size={16} />
-                          )}
+                          <UserIcon size={16} />
                         </AvatarFallback>
                       </Avatar>
 
-                      <Text size="default">
-                        {getFullName(user.first_name, user.last_name) || "-"}
-                      </Text>
+                      {getFullName(user.first_name, user.last_name) || "-"}
                     </div>
                   </TableCell>
                   <TableCell>{user.role}</TableCell>
@@ -193,9 +186,7 @@ export const UsersTable = ({
                       </Tooltip>
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <Button variant="destructive" size="icon-sm">
-                            <Ban />
-                          </Button>
+                          <BlockUserButton userId={user.id} currentStatus={user.status} buttonSize="icon-sm" />
                         </TooltipTrigger>
                         <TooltipContent>Заблокировать</TooltipContent>
                       </Tooltip>

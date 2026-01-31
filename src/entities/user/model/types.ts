@@ -102,3 +102,20 @@ export interface GetUsersParams extends PaginationParams {
 export interface GetUsersResponse extends PaginationResponse {
   results: User[];
 }
+
+export interface Role {
+  id: number;
+  name: string;
+}
+
+export interface GetRolesParams extends PaginationParams {}
+
+export interface GetRolesResponse extends PaginationResponse {
+  results: Role[];
+}
+
+export interface CreateRoleParams {
+  name: string;
+}
+
+export interface CreateRoleResponse extends Role {}
