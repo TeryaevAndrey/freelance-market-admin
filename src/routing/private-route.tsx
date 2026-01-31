@@ -2,7 +2,8 @@ import { Navigate, Outlet } from "react-router-dom";
 import { DashboardLayout } from "@/layout/DashboardLayout";
 
 export const PrivateRoute = () => {
-  const isAuth = true;
+  const token = localStorage.getItem("token");
+  const isAuth = Boolean(token);
 
   if (!isAuth) {
     return <Navigate to="/auth/sign-in" replace />;

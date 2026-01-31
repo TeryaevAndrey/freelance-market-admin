@@ -1,4 +1,8 @@
-import type { WithNull } from "@/shared/types/main-types";
+import type {
+  PaginationParams,
+  PaginationResponse,
+  WithNull,
+} from "@/shared/types/main-types";
 
 export enum USER_ROLES {
   "ADMIN" = 0,
@@ -14,6 +18,24 @@ export enum LEGAL_STATUSES {
   "BUSINESSMAN" = 2,
   "BUSINESS_SOCIETY" = 3,
 }
+
+export enum USER_STATUSES {
+  DRAFT = 0,
+  CONFIRMED = 1,
+  PUBLISHED = 2,
+  HIDDEN = 3,
+  FROZEN = 4,
+  BLOCKED = 5,
+}
+
+export const USER_STATUS_NAMES: Record<USER_STATUSES, string> = {
+  [USER_STATUSES.DRAFT]: "Черновик",
+  [USER_STATUSES.CONFIRMED]: "Подтвержден",
+  [USER_STATUSES.PUBLISHED]: "Опубликован",
+  [USER_STATUSES.HIDDEN]: "Скрыт",
+  [USER_STATUSES.FROZEN]: "Заморожен",
+  [USER_STATUSES.BLOCKED]: "Заблокирован",
+};
 
 export interface User {
   id: number;
@@ -54,7 +76,7 @@ export interface User {
   rep_name?: WithNull<string>; // ФИО представителя
   rep_role?: WithNull<string>; // Должность представителя
   ip_address: WithNull<string>;
-  status: WithNull<number>;
+  status: WithNull<USER_STATUSES>;
   score: number;
   premium_date: WithNull<string>;
   referal_code: WithNull<string>;
@@ -66,17 +88,34 @@ export interface User {
   user_permissions?: number[];
 }
 
-export interface GetUsersParams {
-    cities?: number[];
-    date_created_after?: string;
-    date_created_before?: string;
-    email?: string;
-    first_name?: string;
-    id?: number;
-    is_active?: boolean;
-    last_name?: string;
-    role?: USER_ROLES;
-    username?: string;
+export interface GetUsersParams extends PaginationParams {
+  city?: string;
+  date_created_after?: string;
+  date_created_before?: string;
+  id?: number;
+  is_active?: boolean;
+  query?: string;
+  role?: USER_ROLES;
+  status?: USER_STATUSES;
 }
 
-export type GetUsersResponse = User[];
+export interface GetUsersResponse extends PaginationResponse {
+  results: User[];
+}
+
+export interface Role {
+  id: number;
+  name: string;
+}
+
+export interface GetRolesParams extends PaginationParams {}
+
+export interface GetRolesResponse extends PaginationResponse {
+  results: Role[];
+}
+
+export interface CreateRoleParams {
+  name: string;
+}
+
+export interface CreateRoleResponse extends Role {}
