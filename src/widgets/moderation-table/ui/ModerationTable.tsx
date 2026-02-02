@@ -111,7 +111,7 @@ export const ModerationTable = () => {
         </Table>
       </CardContent>
       <CardFooter>
-        <PagePagination />
+        <PagePagination totalCount={0} pageSize={50} />
       </CardFooter>
     </Card>
   );

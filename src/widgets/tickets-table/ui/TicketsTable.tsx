@@ -104,7 +104,7 @@ export const TicketsTable = () => {
         </Table>
       </CardContent>
       <CardFooter>
-        <PagePagination />
+        <PagePagination totalCount={0} pageSize={10} />
       </CardFooter>
     </Card>
   );

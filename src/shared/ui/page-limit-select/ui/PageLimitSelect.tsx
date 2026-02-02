@@ -6,7 +6,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../select";
-import { DEFAULT_PAGE_SIZE } from "@/shared/constants/pagination.constants";
 import { useAppStore } from "@/shared/store/app.store";
 
 interface Props {

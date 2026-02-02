@@ -67,7 +67,7 @@ export const UserCard = ({ className }: Props) => {
           <InfoCard
             icon={<Luggage size={16} />}
             title="Роли"
-            valueText={user.role || "-"}
+            valueText={String(user.role) || "-"}
             description="служебная"
           />
           <InfoCard

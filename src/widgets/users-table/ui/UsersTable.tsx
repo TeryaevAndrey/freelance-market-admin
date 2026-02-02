@@ -29,7 +29,7 @@ import {
 import { Text } from "@/shared/ui/text";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/ui/tooltip";
 import { format } from "date-fns";
-import { Ban, LogOut, MessageSquareMore, User as UserIcon } from "lucide-react";
+import { LogOut, MessageSquareMore, User as UserIcon } from "lucide-react";
 import type { HTMLAttributes } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -184,7 +184,11 @@ export const UsersTable = ({
                       </Tooltip>
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <BlockUserButton userId={user.id} currentStatus={user.status} buttonSize="icon-sm" />
+                          <BlockUserButton
+                            userId={user.id}
+                            currentStatus={user.status}
+                            buttonSize="icon-sm"
+                          />
                         </TooltipTrigger>
                         <TooltipContent>Заблокировать</TooltipContent>
                       </Tooltip>

@@ -1,7 +1,7 @@
 import { Button } from "@/shared/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/shared/ui/dialog"
 import { EditUserForm } from "./EditUserForm"
-import { userQueries, type User } from "@/entities/user";
+import { userQueries } from "@/entities/user";
 import { useQuery } from "@tanstack/react-query";
 import { Text } from "@/shared/ui/text";
 
