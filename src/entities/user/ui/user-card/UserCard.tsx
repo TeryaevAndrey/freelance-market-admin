@@ -56,8 +56,8 @@ export const UserCard = ({ className }: Props) => {
               </Badge>
             )}
             <Badge variant="outline">
-              <TriangleAlert />
-              Верификация: На проверке
+              {user.is_active ? <Check /> : <TriangleAlert />}
+              Верификация: {user.is_active ? "Пройдена" : "Не пройдена"}
             </Badge>
             <CopyUserIdButton userId={user.id} />
           </div>
