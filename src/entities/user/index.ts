@@ -9,8 +9,7 @@ export { PublicLinksCard } from "./ui/PublicLinksCard";
 export { ServicesCard } from "./ui/ServicesCard";
 
 export {userQueries} from "./api/user.queries";
-export type {User, LEGAL_STATUSES, USER_ROLES} from "./model/types";
-export {USER_STATUSES} from "./model/types";
+export * from "./model/types";
 
 export {getFullName} from "./model/getFullName";
 export {getAbbrName} from "./model/getAbbrName";

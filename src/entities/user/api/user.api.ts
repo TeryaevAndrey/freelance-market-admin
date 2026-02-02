@@ -1,6 +1,5 @@
 import { axiosInstance } from "@/shared/api/base";
 import type {
-
   GetRolesParams,
   GetRolesResponse,
   GetUsersParams,

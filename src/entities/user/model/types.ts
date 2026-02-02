@@ -119,3 +119,16 @@ export interface CreateRoleParams {
 }
 
 export interface CreateRoleResponse extends Role {}
+
+export interface CreateUserParams {
+  role: number;
+  username: string;
+  password: string;
+  password2: string;
+}
+
+export interface CreateUserResponse {
+  id: number;
+  role: number;
+  username: string;
+}
