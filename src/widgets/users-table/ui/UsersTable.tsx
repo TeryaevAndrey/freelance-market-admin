@@ -56,8 +56,6 @@ export const UsersTable = ({
         const userCityId = getCityId(userCity);
         const city = getCityById(Number(userCityId), cities);
 
-        console.log(userCityId, city);
-
         return city?.name;
       })
       .filter((city) => city !== undefined)

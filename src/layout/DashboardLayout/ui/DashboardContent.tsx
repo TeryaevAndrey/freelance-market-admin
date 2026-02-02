@@ -16,7 +16,7 @@ export const DashboardContent = ({ children }: Props) => {
       })}
     >
       <DashboardHeader />
-      <div className="px-4 lg:px-6 flex flex-col gap-4 lg:gap-6 pb-10">
+      <div className="px-4 lg:px-6 flex flex-col gap-4 lg:gap-6 pb-10 grow">
         {children}
       </div>
     </div>

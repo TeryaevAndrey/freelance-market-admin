@@ -13,12 +13,13 @@ import { UserOverview } from "@/widgets/user-overview";
 import { UserProfileAndAccess } from "@/widgets/user-profile-and-access";
 import { UserTicketsCard } from "@/widgets/user-tickets-card";
 import { useParams } from "react-router-dom";
+import { UserProvider } from "../model/UserContext";
 
 export const UserPage = () => {
   const { id } = useParams();
 
   return (
-    <>
+    <UserProvider userId={Number(id)}>
       <PageBreadCrumbs
         items={[
           { label: "Admin panel" },
@@ -35,19 +36,21 @@ export const UserPage = () => {
       <Tabs defaultValue="overview">
         <div className="flex justify-between items-center gap-3 flex-wrap">
           <TabsList>
-          <TabsTrigger value="overview">Обзор</TabsTrigger>
-          <TabsTrigger value="profile-and-access">Профиль и доступ</TabsTrigger>
-          <TabsTrigger value="content">Контент</TabsTrigger>
-          <TabsTrigger value="orders-and-transactions">
-            Заказы и сделки
-          </TabsTrigger>
-          <TabsTrigger value="finance">Финансы</TabsTrigger>
-          <TabsTrigger value="tickets">Обращения</TabsTrigger>
-          <TabsTrigger value="logs">Логирование</TabsTrigger>
-          <TabsTrigger value="notes">Заметки</TabsTrigger>
-        </TabsList>
+            <TabsTrigger value="overview">Обзор</TabsTrigger>
+            <TabsTrigger value="profile-and-access">
+              Профиль и доступ
+            </TabsTrigger>
+            <TabsTrigger value="content">Контент</TabsTrigger>
+            <TabsTrigger value="orders-and-transactions">
+              Заказы и сделки
+            </TabsTrigger>
+            <TabsTrigger value="finance">Финансы</TabsTrigger>
+            <TabsTrigger value="tickets">Обращения</TabsTrigger>
+            <TabsTrigger value="logs">Логирование</TabsTrigger>
+            <TabsTrigger value="notes">Заметки</TabsTrigger>
+          </TabsList>
 
-        <EditUserModal />
+          <EditUserModal />
         </div>
         <TabsContent value="overview">
           <UserOverview />
@@ -82,6 +85,6 @@ export const UserPage = () => {
           </div>
         </TabsContent>
       </Tabs>
-    </>
+    </UserProvider>
   );
 };

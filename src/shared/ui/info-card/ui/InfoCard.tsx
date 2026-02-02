@@ -32,7 +32,7 @@ export const InfoCard = ({
             {valueText}
           </Text>
           {description && (
-            <Text size="xs" color="mutedForeground">
+            <Text className="w-full" size="xs" color="mutedForeground">
               {description}
             </Text>
           )}

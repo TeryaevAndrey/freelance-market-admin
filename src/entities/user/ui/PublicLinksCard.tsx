@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils"
+import { useUserContext } from "@/pages/dashboard/user"
 import { Button } from "@/shared/ui/button"
 import { Card, CardHeader, CardTitle } from "@/shared/ui/card"
 import { ExternalLink } from "lucide-react"
@@ -8,6 +9,8 @@ import { Link } from "react-router-dom"
 interface Props extends HTMLAttributes<HTMLDivElement> {}
 
 export const PublicLinksCard = ({className}: Props) => {
+    const {user} = useUserContext();
+
     return(
         <Card className={cn(className)}>
             <CardHeader className="gap-0">
@@ -17,7 +20,7 @@ export const PublicLinksCard = ({className}: Props) => {
                     </CardTitle>
                     <div className="flex items-center gap-3 flex-wrap">
                         <Button variant="outline" size="sm" asChild>
-                            <Link to="/">
+                            <Link to={`${import.meta.env.VITE_WEBSITE_URL}/profile/${user.id}`}>
                                 <ExternalLink />
                                 Профиль
                             </Link>

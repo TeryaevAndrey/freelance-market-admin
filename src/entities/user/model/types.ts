@@ -43,7 +43,7 @@ export interface User {
   linguas: string[];
   tranings: string[];
   achievements: string[];
-  role: USER_ROLES;
+  role: string;
   last_login?: WithNull<string>;
   is_superuser?: boolean;
   username?: WithNull<string>;
