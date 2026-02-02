@@ -43,7 +43,7 @@ export interface User {
   linguas: string[];
   tranings: string[];
   achievements: string[];
-  role: string;
+  role: string | number;
   last_login?: WithNull<string>;
   is_superuser?: boolean;
   username?: WithNull<string>;
@@ -132,3 +132,7 @@ export interface CreateUserResponse {
   role: number;
   username: string;
 }
+
+export interface UpdateUserParams extends Partial<User> {}
+
+export interface UpdateUserResponse extends User {};

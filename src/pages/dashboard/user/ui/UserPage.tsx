@@ -50,7 +50,7 @@ export const UserPage = () => {
             <TabsTrigger value="notes">Заметки</TabsTrigger>
           </TabsList>
 
-          <EditUserModal />
+          <EditUserModal userId={Number(id)} />
         </div>
         <TabsContent value="overview">
           <UserOverview />

@@ -4,6 +4,8 @@ import type {
   GetRolesResponse,
   GetUsersParams,
   GetUsersResponse,
+  UpdateUserParams,
+  UpdateUserResponse,
   User,
 } from "../model/types";
 
@@ -30,4 +32,10 @@ export const userApi = {
 
     return response.data;
   },
+
+  updateUser: async (params: UpdateUserParams): Promise<UpdateUserResponse> => {
+    const response = await axiosInstance.patch(`/accounts/${params.id}/update/`, params);
+
+    return response.data
+  }
 };

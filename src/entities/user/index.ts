@@ -8,6 +8,7 @@ export { StatusesHistoryCard } from "./ui/StatusesHistoryCard";
 export { PublicLinksCard } from "./ui/PublicLinksCard";
 export { ServicesCard } from "./ui/ServicesCard";
 
+export {userApi} from "./api/user.api";
 export {userQueries} from "./api/user.queries";
 export * from "./model/types";
 
