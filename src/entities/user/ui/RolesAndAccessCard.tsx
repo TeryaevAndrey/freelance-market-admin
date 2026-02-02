@@ -1,3 +1,4 @@
+import { useUserContext } from "@/pages/dashboard/user";
 import { ActionCard } from "@/shared/ui/action-card";
 import { Badge } from "@/shared/ui/badge";
 import { Button } from "@/shared/ui/button";
@@ -6,6 +7,8 @@ import { Text } from "@/shared/ui/text";
 import { KeyRound } from "lucide-react";
 
 export const RolesAndAccessCard = () => {
+  const { user } = useUserContext();
+
   return (
     <Card>
       <CardHeader className="gap-0">
@@ -24,10 +27,11 @@ export const RolesAndAccessCard = () => {
               <Text tag="h5" size="xs" color="mutedForeground">
                 Роли
               </Text>
-              <div className="flex items-center gap-3 flex-wrap">
-                <Badge variant="outline">Клиент</Badge>
-                <Badge variant="outline">Исполнитель</Badge>
-              </div>
+              {user.role && (
+                <div className="flex items-center gap-3 flex-wrap">
+                  <Badge variant="outline">{user.role}</Badge>
+                </div>
+              )}
             </CardContent>
           </Card>
 

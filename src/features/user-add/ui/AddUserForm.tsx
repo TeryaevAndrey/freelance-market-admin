@@ -7,7 +7,7 @@ import {
   FormMessage,
 } from "@/shared/ui/form";
 import { useForm } from "react-hook-form";
-import type { AddUserFormSchema } from "../model/add-user-schema";
+import { addUserSchema, type AddUserFormSchema } from "../model/add-user-schema";
 import {
   Select,
   SelectContent,
@@ -18,20 +18,33 @@ import {
 } from "@/shared/ui/select";
 import { Input } from "@/shared/ui/input";
 import { Button } from "@/shared/ui/button";
+import { useQuery } from "@tanstack/react-query";
+import { userQueries } from "@/entities/user";
+import { useCreateUser } from "../model/useCreateUser";
+import {zodResolver} from "@hookform/resolvers/zod";
 
 export const AddUserForm = () => {
   const form = useForm<AddUserFormSchema>({
+    resolver: zodResolver(addUserSchema),
     defaultValues: {
       role: "",
-      name: "",
-      surname: "",
       username: "",
       password: "",
     },
   });
+  const { data: roles } = useQuery(
+    userQueries.roles({ page: 1, page_size: 50 }),
+  );
+
+  const { mutate, isPending } = useCreateUser();
 
   const onSubmit = (data: AddUserFormSchema) => {
-    console.log(data);
+    mutate({
+      role: Number(data.role),
+      username: data.username,
+      password: data.password,
+      password2: data.password,
+    });
   };
 
   return (
@@ -55,9 +68,11 @@ export const AddUserForm = () => {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
-                        <SelectItem value="item-1">Role 1</SelectItem>
-                        <SelectItem value="item-2">Role 2</SelectItem>
-                        <SelectItem value="item-3">Role 3</SelectItem>
+                        {roles?.results.map((role) => (
+                          <SelectItem key={role.id} value={String(role.id)}>
+                            {role.name}
+                          </SelectItem>
+                        ))}
                       </SelectGroup>
                     </SelectContent>
                   </Select>
@@ -66,7 +81,7 @@ export const AddUserForm = () => {
               </FormItem>
             )}
           />
-
+          {/* 
           <FormField
             control={form.control}
             name="name"
@@ -93,7 +108,7 @@ export const AddUserForm = () => {
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
 
           <FormField
             control={form.control}
@@ -128,8 +143,13 @@ export const AddUserForm = () => {
           />
         </div>
 
-        <Button className="w-full mt-6" type="submit" variant="default">
-          Сохранить
+        <Button
+          className="w-full mt-6"
+          type="submit"
+          variant="default"
+          disabled={isPending}
+        >
+          {!isPending ? "Сохранить" : "Загрузка..."}
         </Button>
       </form>
     </Form>

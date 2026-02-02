@@ -23,20 +23,17 @@ import {
 } from "@/shared/ui/select";
 import { SelectWithSearch } from "@/shared/ui/select-with-search";
 import { DatePicker } from "@/shared/ui/date-picker";
-
-const CITIES = [
-  {
-    label: "Все города",
-    value: "all",
-  },
-  {
-    label: "Москва",
-    value: "1",
-  },
-];
+import { useQuery } from "@tanstack/react-query";
+import { userQueries } from "@/entities/user";
+import { useRegions } from "@/shared/contexts/RegionsContext";
+import { format, isValid } from "date-fns";
 
 export const UserFilters = () => {
   const form = useUserFilters();
+  const { data: roles } = useQuery(
+    userQueries.roles({ page: 1, page_size: 100 }),
+  );
+  const { cities } = useRegions();
 
   return (
     <Card>
@@ -83,6 +80,11 @@ export const UserFilters = () => {
                         <SelectContent>
                           <SelectGroup>
                             <SelectItem value="all">Все</SelectItem>
+                            {roles?.results.map((role) => (
+                              <SelectItem key={role.id} value={String(role.id)}>
+                                {role.name}
+                              </SelectItem>
+                            ))}
                           </SelectGroup>
                         </SelectContent>
                       </Select>
@@ -126,7 +128,13 @@ export const UserFilters = () => {
                     <FormControl>
                       <SelectWithSearch
                         placeholder="Выберите город"
-                        list={CITIES}
+                        list={[
+                          { value: "all", label: "Все" },
+                          ...(cities?.map((city) => ({
+                            value: String(city.id),
+                            label: city.name,
+                          })) || []),
+                        ]}
                         value={field.value}
                         onChange={field.onChange}
                       />
@@ -144,11 +152,18 @@ export const UserFilters = () => {
                     <FormControl>
                       <DatePicker
                         value={
-                          Boolean(field.value)
+                          field.value && isValid(new Date(field.value))
                             ? new Date(field.value)
                             : undefined
                         }
-                        onChange={field.onChange}
+                        onChange={(date) => {
+                          if (date) {
+                            const formattedDate = format(date, "yyyy-MM-dd");
+                            field.onChange(formattedDate);
+                          } else {
+                            field.onChange("");
+                          }
+                        }}
                       />
                     </FormControl>
                   </FormItem>
@@ -164,11 +179,18 @@ export const UserFilters = () => {
                     <FormControl>
                       <DatePicker
                         value={
-                          Boolean(field.value)
+                          field.value && isValid(new Date(field.value))
                             ? new Date(field.value)
                             : undefined
                         }
-                        onChange={field.onChange}
+                        onChange={(date) => {
+                          if (date) {
+                            const formattedDate = format(date, "yyyy-MM-dd");
+                            field.onChange(formattedDate);
+                          } else {
+                            field.onChange("");
+                          }
+                        }}
                       />
                     </FormControl>
                   </FormItem>

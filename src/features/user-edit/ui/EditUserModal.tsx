@@ -1,8 +1,17 @@
 import { Button } from "@/shared/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/shared/ui/dialog"
 import { EditUserForm } from "./EditUserForm"
+import { userQueries } from "@/entities/user";
+import { useQuery } from "@tanstack/react-query";
+import { Text } from "@/shared/ui/text";
 
-export const EditUserModal = () => {
+interface Props {
+    userId: number;
+}
+
+export const EditUserModal = ({userId}: Props) => {
+    const {data: user, isPending} = useQuery(userQueries.detail(userId));
+
     return(
         <Dialog>
             <DialogTrigger asChild>
@@ -15,7 +24,11 @@ export const EditUserModal = () => {
                     <DialogTitle>Редактирование пользователя</DialogTitle>
                 </DialogHeader>
 
-                <EditUserForm />                
+                {(user && !isPending) ? (
+                    <EditUserForm userId={userId} user={user} />    
+                ) : (
+                    <Text className="text-center min-h-48" size="sm">Загрузка...</Text>
+                )}            
             </DialogContent>
         </Dialog>
     )

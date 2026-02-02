@@ -1,9 +1,11 @@
 export interface SignInParams {
-    email: string;
-    password: string;
+  email?: string;
+  username?: string;
+  password: string;
 }
 
 export interface SignInResponse {
-    email: string;
-    token: string;
+  email?: string;
+  username?: string;
+  token: string;
 }

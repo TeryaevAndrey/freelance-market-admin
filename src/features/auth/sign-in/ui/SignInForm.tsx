@@ -10,12 +10,23 @@ import { useForm } from "react-hook-form";
 import type { FormSchema } from "../model/form-schema";
 import { Input } from "@/shared/ui/input";
 import { Button } from "@/shared/ui/button";
+import { useSignIn } from "../model/useSignIn";
 
 export const SignInForm = () => {
   const form = useForm<FormSchema>();
 
+  const { mutate, isPending } = useSignIn();
+
+  const username = form.watch("username");
+  const password = form.watch("password");
+
+  const isFieldsFilled = username && password;
+
   const onSubmit = (data: FormSchema) => {
-    console.log(data);
+    mutate({
+      username: data.username,
+      password: data.password,
+    });
   };
 
   return (
@@ -54,8 +65,8 @@ export const SignInForm = () => {
           />
         </div>
 
-        <Button className="w-full mt-6" type="submit">
-          Войти
+        <Button className="w-full mt-6" type="submit" disabled={isPending || !isFieldsFilled}>
+          {isPending ? "Вход..." : "Войти"}
         </Button>
       </form>
     </Form>

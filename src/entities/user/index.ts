@@ -7,3 +7,11 @@ export { RolesAndAccessCard } from "./ui/RolesAndAccessCard";
 export { StatusesHistoryCard } from "./ui/StatusesHistoryCard";
 export { PublicLinksCard } from "./ui/PublicLinksCard";
 export { ServicesCard } from "./ui/ServicesCard";
+
+export {userApi} from "./api/user.api";
+export {userQueries} from "./api/user.queries";
+export * from "./model/types";
+
+export {getFullName} from "./model/getFullName";
+export {getAbbrName} from "./model/getAbbrName";
+export {getUserStatusName} from "./model/getUserStatusName";
