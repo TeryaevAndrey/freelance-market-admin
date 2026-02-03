@@ -24,7 +24,7 @@ import {
 import { SelectWithSearch } from "@/shared/ui/select-with-search";
 import { DatePicker } from "@/shared/ui/date-picker";
 import { useQuery } from "@tanstack/react-query";
-import { userQueries } from "@/entities/user";
+import { USER_STATUS_NAMES, userQueries } from "@/entities/user";
 import { useRegions } from "@/shared/contexts/RegionsContext";
 import { format, isValid } from "date-fns";
 
@@ -81,7 +81,7 @@ export const UserFilters = () => {
                           <SelectGroup>
                             <SelectItem value="all">Все</SelectItem>
                             {roles?.results.map((role) => (
-                              <SelectItem key={role.id} value={String(role.id)}>
+                              <SelectItem key={role.id} value={role.name}>
                                 {role.name}
                               </SelectItem>
                             ))}
@@ -111,6 +111,13 @@ export const UserFilters = () => {
                         <SelectContent>
                           <SelectGroup>
                             <SelectItem value="all">Все</SelectItem>
+                            {Object.entries(USER_STATUS_NAMES).map(
+                              ([value, label]) => (
+                                <SelectItem key={value} value={value}>
+                                  {label}
+                                </SelectItem>
+                              ),
+                            )}
                           </SelectGroup>
                         </SelectContent>
                       </Select>
